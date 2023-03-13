@@ -1,4 +1,4 @@
-import Words.words;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +19,27 @@ public class Wordle {
       int guessCount = 0;
       boolean hasCorrectWord = false;
 
+      String[] letters = new String[] {String.valueOf(inputWord.split(""))};
+        System.out.println(letters);
+
       if (inputWord.equals(todaysWord)){
           hasCorrectWord = true;
       }
 
       while (!hasCorrectWord && guessCount <= 6){
-          int compareInputIndex = 0;
+          int inputWordIndex = 0;
+          int todaysWordIndex = 0;
+            String inputLetter = inputWord.substring(0,1);
+          int wordLength = todaysWord.length();
+
+          for (inputWordIndex = 0; inputWordIndex < wordLength; inputWordIndex++) {
+            for (todaysWordIndex = 0; todaysWordIndex < wordLength; todaysWordIndex++) {
+                if ()
+            }
+          }
 
 
-      }
+
 
 
     }
