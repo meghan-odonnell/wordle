@@ -13,7 +13,7 @@ public class Wordle {
       words.add("hello");
       words.add("world");
 
-      String inputWord = "howdy";
+      String guess = "howdy";
       String todaysWord = words.get(new Random().nextInt(words.size()));
 
       int guessCount = 0;
@@ -24,12 +24,27 @@ public class Wordle {
         System.out.println(ANSI_RESET);
         final String ANSI_YELLOW = "\u001B[33m";
         System.out.println(ANSI_YELLOW);
-      String[] letters = new String[] {String.valueOf(inputWord.split(""))};
-        System.out.println(letters);
 
-      if (inputWord.equals(todaysWord)){
+
+
+      if (guess.equals(todaysWord)){
           hasCorrectWord = true;
       }
+      StringBuilder b = new StringBuilder();
+      for (int i = 0; i < guess.length(); i++) {
+        char c = guess.charAt(i);
+        if (todaysWord.charAt(i) == c) {
+          b.append(ANSI_GREEN + c + ANSI_RESET);
+        } else if (todaysWord.contains(Character.toString(c))) {
+          b.append(ANSI_YELLOW + c + ANSI_RESET);
+        } else {
+          b.append(c);
+
+        }
+      }
+      System.out.println(b);
+
+
 //
 //      while (!hasCorrectWord && guessCount <= 6){
 //          int inputWordIndex = 0;
