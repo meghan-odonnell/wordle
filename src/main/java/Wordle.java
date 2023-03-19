@@ -21,9 +21,10 @@ public class Wordle {
 
       int guessCount = 1;
       boolean hasCorrectWord = false;
-      final String ANSI_GREEN = "\u001B[32m";
+      final String ANSI_GREEN = "\033[0;92m";
       final String ANSI_RESET = "\u001B[0m";
-      final String ANSI_YELLOW = "\u001B[33m";
+      final String ANSI_YELLOW = "\033[0;93m";
+      final String ANSI_WHITE = "\033[0;97m";
 
 
       running = true;
@@ -33,38 +34,43 @@ public class Wordle {
 
 
       while(running && guessCount<=6) {
-        guess = input.next();
-          if (guess.equals(todaysWord)) {
-            System.out.println("Woohoo! You got it correct in " + guessCount + " guesses!");
-            hasCorrectWord = true;
-            running = false;
-          }
-          System.out.println("+--------------------+");
-          System.out.print("| ");
+        guess = input.next().toUpperCase();
+
+        //  System.out.println("+--------------------+");
+        System.out.println("+-+-+-+-+-+");
+          System.out.print("|");
           StringBuilder b = new StringBuilder();
 
 
           for (int i = 0; i < guess.length(); i++) {
             StringBuilder d = new StringBuilder();
             char c = guess.charAt(i);
-            if (todaysWord.charAt(i) == c) {
+            if (todaysWord.toUpperCase().charAt(i) == c) {
               System.out.print(d.append(ANSI_GREEN + c + ANSI_RESET));
-              System.out.print(" | ");
+              System.out.print("|");
               b.append(ANSI_GREEN + c + ANSI_RESET);
-            } else if (todaysWord.contains(Character.toString(c))) {
+            } else if (todaysWord.toUpperCase().contains(Character.toString(c))) {
               System.out.print(d.append(ANSI_YELLOW + c + ANSI_RESET));
-              System.out.print(" | ");
+              System.out.print("|");
               b.append(ANSI_YELLOW + c + ANSI_RESET);
             } else {
-              System.out.print(d.append(c) + " | ");
+              System.out.print(d.append(ANSI_WHITE + c + ANSI_RESET) + "|");
               b.append(c);
 
             }
           }
         System.out.println("");
-          System.out.println("+--------------------+");
+          System.out.println("+-+-+-+-+-+");
          // System.out.println("Count:" + guessCount);
-          guessCount++;
+
+        if (guess.equalsIgnoreCase(todaysWord)) {
+          System.out.println("Woohoo! You got it correct in " + guessCount + " guesses!");
+          hasCorrectWord = true;
+          running = false;
+
+
+        }
+        guessCount++;
         }
 
 
@@ -72,6 +78,20 @@ public class Wordle {
 
 
 
+//   +-+-+-+-+-+-+
+//   |W|O|R|D|L|E|
+//   +-+-+-+-+-+-+
+
+
+//
+//   _______ _______ _______ _______ _______ _______
+//  |\     /|\     /|\     /|\     /|\     /|\     /|
+//  | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
+//  | |   | | |   | | |   | | |   | | |   | | |   | |
+//  | |W  | | |O  | | |R  | | |D  | | |L  | | |E  | |
+//  | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
+//  |/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|
+//
 
 
     }
