@@ -2,6 +2,8 @@
 
 
 
+import Services.WordService;
+
 import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +33,9 @@ public class Wordle {
       words.add("world");
       String guess = "howdy";
       String todaysWord = words.get(new Random().nextInt(words.size()));
+
+      WordService wordService = null;
+      guess = wordService.getWord();
 
       int guessCount = 1;
       boolean hasCorrectWord = false;
