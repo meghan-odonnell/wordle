@@ -1,14 +1,27 @@
 
 
 
+
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.http.HttpHeaders;
+import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+
+
 public class Wordle {
 
-    public static void main(String[] args) {
+  public Wordle() throws IOException {
+  }
+
+  public static void main(String[] args) {
       Boolean running = false;
       Scanner input = new Scanner(System.in);
       List<String> words = new ArrayList<>();
@@ -95,4 +108,6 @@ public class Wordle {
 
 
     }
+
+
 }
