@@ -1,8 +1,11 @@
 package Services;
 
+
+import Model.RandomWord;
+
 public interface WordService {
 
-    String getWord();
+    RandomWord getWord();
 
 
 

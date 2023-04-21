@@ -16,9 +16,9 @@ public class WordController {
     }
 
     @RequestMapping(path="?words=1&length=5", method = RequestMethod.GET)
-    public RandomWord getRandomWord(){
-        RandomWord newWord = new RandomWord();
-        newWord.setWord(wordService.getWord());
-        return newWord;
+    public String getRandomWord(){
+
+
+        return null;
     }
 }

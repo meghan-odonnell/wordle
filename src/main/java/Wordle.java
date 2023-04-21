@@ -1,16 +1,7 @@
+import Model.RandomWord;
+import org.springframework.web.client.RestTemplate;
 
-
-
-
-import Services.WordService;
-
-import java.awt.*;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.http.HttpHeaders;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,6 +10,7 @@ import java.util.Scanner;
 
 
 public class Wordle {
+
 
   public Wordle() throws IOException {
   }
@@ -34,8 +26,10 @@ public class Wordle {
       String guess = "howdy";
       String todaysWord = words.get(new Random().nextInt(words.size()));
 
-      WordService wordService = null;
-      guess = wordService.getWord();
+      RestTemplate restTemplate = new RestTemplate();
+      String response = restTemplate.getForObject("https://random-word-api.vercel.app/api?words=1&length=5",String.class);
+      todaysWord = response;
+      System.out.println(todaysWord);
 
       int guessCount = 1;
       boolean hasCorrectWord = false;

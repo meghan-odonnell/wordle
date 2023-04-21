@@ -2,7 +2,7 @@ package Model;
 
 public class RandomWord {
 
-    String word;
+    private String word;
 
     public RandomWord() {
     }
