@@ -19,17 +19,24 @@ public class Wordle {
       Boolean running = false;
       Scanner input = new Scanner(System.in);
       List<String> words = new ArrayList<>();
+      int length = 5;
+      int guessesAllowed = 6;
 
 
-      words.add("hello");
-      words.add("world");
+//      words.add("hello");
+//      words.add("world");
       String guess = "howdy";
-      String todaysWord = words.get(new Random().nextInt(words.size()));
+//      String todaysWord = words.get(new Random().nextInt(words.size()));
 
+      System.out.println("Welcome to Wordle! Enter a number for the length of word you want to guess:");
+      length = Integer.parseInt(input.next());
+      guessesAllowed = length+1;
+      String API_URL = "https://random-word-api.vercel.app/api?words=1&length=";
       RestTemplate restTemplate = new RestTemplate();
-      String response = restTemplate.getForObject("https://random-word-api.vercel.app/api?words=1&length=5",String.class);
-      todaysWord = response;
-      System.out.println(todaysWord);
+      String response = restTemplate.getForObject(API_URL + length,String.class);
+      response = response.substring(2,response.length()-2);
+      String todaysWord = response;
+//      System.out.println(todaysWord);
 
       int guessCount = 1;
       boolean hasCorrectWord = false;
@@ -42,10 +49,14 @@ public class Wordle {
       running = true;
 
       System.out.println("Enter a word to guess");
-      System.out.println("__  __  __  __  __");
+      for (int i = 0; i < length; i++) {
+          System.out.print("__  ");
+
+      }
+//      System.out.println("__  __  __  __  __");
 
 
-      while(running && guessCount<=6) {
+      while(running && guessCount<=guessesAllowed) {
         guess = input.next().toUpperCase();
 
         //  System.out.println("+--------------------+");
@@ -76,16 +87,16 @@ public class Wordle {
          // System.out.println("Count:" + guessCount);
 
         if (guess.equalsIgnoreCase(todaysWord)) {
-          System.out.println("Woohoo! You got it correct in " + guessCount + " guesses!");
+          System.out.println("Woohoo! You got the word " + todaysWord + "correct in " + guessCount + " guesses!");
           hasCorrectWord = true;
           running = false;
-
-
         }
+
         guessCount++;
+
         }
 
-
+      System.out.println("Nice try! The word is '" + todaysWord + "' " );
       System.out.println("Thanks for playing  :)");
 
 
