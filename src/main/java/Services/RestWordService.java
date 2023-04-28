@@ -13,8 +13,6 @@ public class RestWordService implements WordService {
 
     @Override
     public RandomWord getWord() {
-//        ResponseEntity response = restTemplate.getForEntity(API_URL,RandomWord.class);
-//        return response;
         RandomWord newRandomWord = restTemplate.getForObject(API_URL, RandomWord.class);
         return newRandomWord;
     }

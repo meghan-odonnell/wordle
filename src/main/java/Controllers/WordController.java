@@ -11,14 +11,4 @@ import org.springframework.web.bind.annotation.RestController;
 public class WordController {
     private WordService wordService;
 
-    public WordController(WordService wordService){
-        this.wordService = wordService;
-    }
-
-    @RequestMapping(path="?words=1&length=5", method = RequestMethod.GET)
-    public String getRandomWord(){
-
-
-        return null;
-    }
 }

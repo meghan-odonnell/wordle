@@ -4,7 +4,6 @@ import org.springframework.web.client.RestTemplate;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 
@@ -21,22 +20,19 @@ public class Wordle {
       List<String> words = new ArrayList<>();
       int length = 5;
       int guessesAllowed = 6;
+      String guess;
 
-
-//      words.add("hello");
-//      words.add("world");
-      String guess = "howdy";
-//      String todaysWord = words.get(new Random().nextInt(words.size()));
 
       System.out.println("Welcome to Wordle! Enter a number for the length of word you want to guess:");
+
       length = Integer.parseInt(input.next());
       guessesAllowed = length+1;
+
       String API_URL = "https://random-word-api.vercel.app/api?words=1&length=";
       RestTemplate restTemplate = new RestTemplate();
-      String response = restTemplate.getForObject(API_URL + length,String.class);
-      response = response.substring(2,response.length()-2);
-      String todaysWord = response;
-//      System.out.println(todaysWord);
+      String currentWord = restTemplate.getForObject(API_URL + length,String.class);
+      currentWord = currentWord.substring(2,currentWord.length()-2);
+
 
       int guessCount = 1;
       boolean hasCorrectWord = false;
@@ -53,13 +49,13 @@ public class Wordle {
           System.out.print("__  ");
 
       }
-//      System.out.println("__  __  __  __  __");
+
 
 
       while(running && guessCount<=guessesAllowed) {
         guess = input.next().toUpperCase();
 
-        //  System.out.println("+--------------------+");
+
         System.out.println("+-+-+-+-+-+");
           System.out.print("|");
           StringBuilder b = new StringBuilder();
@@ -68,11 +64,11 @@ public class Wordle {
           for (int i = 0; i < guess.length(); i++) {
             StringBuilder d = new StringBuilder();
             char c = guess.charAt(i);
-            if (todaysWord.toUpperCase().charAt(i) == c) {
+            if (currentWord.toUpperCase().charAt(i) == c) {
               System.out.print(d.append(ANSI_GREEN + c + ANSI_RESET));
               System.out.print("|");
               b.append(ANSI_GREEN + c + ANSI_RESET);
-            } else if (todaysWord.toUpperCase().contains(Character.toString(c))) {
+            } else if (currentWord.toUpperCase().contains(Character.toString(c))) {
               System.out.print(d.append(ANSI_YELLOW + c + ANSI_RESET));
               System.out.print("|");
               b.append(ANSI_YELLOW + c + ANSI_RESET);
@@ -84,10 +80,9 @@ public class Wordle {
           }
         System.out.println("");
           System.out.println("+-+-+-+-+-+");
-         // System.out.println("Count:" + guessCount);
 
-        if (guess.equalsIgnoreCase(todaysWord)) {
-          System.out.println("Woohoo! You got the word " + todaysWord + "correct in " + guessCount + " guesses!");
+        if (guess.equalsIgnoreCase(currentWord)) {
+          System.out.println("Woohoo! You got the word " + currentWord + "correct in " + guessCount + " guesses!");
           hasCorrectWord = true;
           running = false;
         }
@@ -96,26 +91,8 @@ public class Wordle {
 
         }
 
-      System.out.println("Nice try! The word is '" + todaysWord + "' " );
+      System.out.println("Nice try! The word is '" + currentWord + "' " );
       System.out.println("Thanks for playing  :)");
-
-
-
-//   +-+-+-+-+-+-+
-//   |W|O|R|D|L|E|
-//   +-+-+-+-+-+-+
-
-
-//
-//   _______ _______ _______ _______ _______ _______
-//  |\     /|\     /|\     /|\     /|\     /|\     /|
-//  | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
-//  | |   | | |   | | |   | | |   | | |   | | |   | |
-//  | |W  | | |O  | | |R  | | |D  | | |L  | | |E  | |
-//  | +---+ | +---+ | +---+ | +---+ | +---+ | +---+ |
-//  |/_____\|/_____\|/_____\|/_____\|/_____\|/_____\|
-//
-
 
     }
 
