@@ -1,14 +1,11 @@
-import Services.RestWordService;
 import Services.WordService;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 
 public class App {
-    private RestWordService wordService = new RestWordService();
+    private WordService wordService = new WordService();
 
 
 
@@ -22,9 +19,8 @@ public class App {
 
       Boolean running = false;
       Scanner input = new Scanner(System.in);
-      List<String> words = new ArrayList<>();
-      int length = 5;
-      int guessesAllowed = 6;
+      int length;
+      int guessesAllowed;
       String guess;
 
 
@@ -37,10 +33,6 @@ public class App {
       guessesAllowed = length+1;
       String randomWord = wordService.getWord(length);
 
-      //String API_URL = "https://random-word-api.vercel.app/api?words=1&length=";
-//      RestTemplate restTemplate = new RestTemplate();
-//      String currentWord = restTemplate.getForObject(API_URL + length,String.class);
-//      currentWord = currentWord.substring(2,currentWord.length()-2);
 
 
       int guessCount = 1;
