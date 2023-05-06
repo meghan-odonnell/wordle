@@ -5,7 +5,7 @@ import Model.RandomWord;
 
 public interface WordService {
 
-    RandomWord getWord();
+    String getWord(int length);
 
 
 
