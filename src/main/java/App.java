@@ -1,6 +1,4 @@
 import Services.WordService;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
@@ -11,6 +9,7 @@ public class App {
 
   public static void main(String[] args) {
       App app = new App();
+      System.out.println("running");
       app.run();
   }
 
@@ -19,8 +18,7 @@ public class App {
 
       Boolean running = false;
       Scanner input = new Scanner(System.in);
-      int length;
-      int guessesAllowed;
+
       String guess;
 
 
@@ -28,9 +26,9 @@ public class App {
 
 
       System.out.println("Welcome to Wordle! Enter a number for the length of word you want to guess:");
+      int length = Integer.parseInt(input.next());
+      int guessesAllowed = length + 1;
 
-      length = Integer.parseInt(input.next());
-      guessesAllowed = length+1;
       String randomWord = wordService.getWord(length);
 
 
@@ -56,26 +54,30 @@ public class App {
       while(running && guessCount<=guessesAllowed) {
         guess = input.next().toUpperCase();
 
+          if(guess.length()!=randomWord.length()){
+              System.out.println("please enter valid length");
 
         System.out.println("+-+-+-+-+-+");
           System.out.print("|");
-          StringBuilder b = new StringBuilder();
+//          StringBuilder b = new StringBuilder();
 
 
+          }
           for (int i = 0; i < guess.length(); i++) {
             StringBuilder d = new StringBuilder();
             char c = guess.charAt(i);
+
             if (randomWord.toUpperCase().charAt(i) == c) {
               System.out.print(d.append(ANSI_GREEN + c + ANSI_RESET));
               System.out.print("|");
-              b.append(ANSI_GREEN + c + ANSI_RESET);
+//              b.append(ANSI_GREEN + c + ANSI_RESET);
             } else if (randomWord.toUpperCase().contains(Character.toString(c))) {
               System.out.print(d.append(ANSI_YELLOW + c + ANSI_RESET));
               System.out.print("|");
-              b.append(ANSI_YELLOW + c + ANSI_RESET);
+//              b.append(ANSI_YELLOW + c + ANSI_RESET);
             } else {
               System.out.print(d.append(ANSI_WHITE + c + ANSI_RESET) + "|");
-              b.append(c);
+//              b.append(c);
 
             }
           }
